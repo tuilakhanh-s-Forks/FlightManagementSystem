@@ -36,13 +36,19 @@ public class FileManager {
     public ProductData loadFromFile() {
         ProductData productData = null;
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PRODUCT_PATH))) {
+        File productFile = new File(PRODUCT_PATH);
+
+        if (!productFile.exists()) {
+            System.out.println("File " + PRODUCT_PATH + " does not exist.");
+            return productData;
+        }
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(productFile))) {
             productData = (ProductData) ois.readObject();
             System.out.println("Load Product.dat from file successfully!");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        
+
         return productData;
     }
 }
