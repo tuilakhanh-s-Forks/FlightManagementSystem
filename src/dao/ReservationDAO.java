@@ -45,6 +45,9 @@ public class ReservationDAO extends ArrayList<Reservation> implements IDAO<Reser
     
     @Override
     public String toString() {
+        if (this.isEmpty()) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder();
         for (Reservation reservation : this) {
             sb.append(reservation).append("\n");

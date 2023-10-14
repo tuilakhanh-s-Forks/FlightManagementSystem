@@ -41,6 +41,9 @@ public class CrewDAO extends ArrayList<Crew> implements IDAO<Crew> {
     
     @Override
     public String toString() {
+        if (this.isEmpty()) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder();
         for (Crew crew : this) {
             sb.append(crew).append("\n");

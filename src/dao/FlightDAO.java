@@ -43,6 +43,9 @@ public class FlightDAO extends ArrayList<Flight> implements IDAO<Flight> {
     
     @Override
     public String toString() {
+        if (this.isEmpty()) {
+            return "";
+        }
         ArrayList<Flight> sortedFlight = new ArrayList<>();
         sortedFlight.addAll(this);
         sortedFlight.sort(Utils.dateDesc);
