@@ -19,10 +19,10 @@ public class Program {
         service.loadFormFile();
         service.loginForm();
         int choice = -1;
-        boolean isContinue = false;
+        boolean isRedo = false;
         do
         {            
-            if (!isContinue) {
+            if (!isRedo) {
                 choice = Menu.getChoice(Menu.MAIN_MENU);
             }
             switch(choice){
@@ -61,7 +61,11 @@ public class Program {
                 case 8:
                     return;
             }
-            isContinue = Input.checkYesOrNo("Do you want to redo this function? (Y/N): ");
+            if (choice == 1 || choice == 7) {
+                isRedo = false;
+                continue;
+            }
+            isRedo = Input.checkYesOrNo("Do you want to redo this function? (Y/N): ");
         } while (choice != -1);
     }
 }

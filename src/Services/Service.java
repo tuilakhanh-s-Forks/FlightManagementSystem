@@ -98,6 +98,7 @@ public class Service {
     }
     
     public void checkIn() {
+        System.out.print(reservationDAO);
         String reservationID = Input.inputValidCode("Reservation");
         Optional<Reservation> selectedReservation = reservationDAO.get(reservationID);
         if (selectedReservation.isEmpty()) {
