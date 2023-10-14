@@ -5,7 +5,6 @@
 package dao;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Optional;
 import model.Flight;
 import utils.Utils;

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import model.Flight;
 import model.Passenger;
 import model.Reservation;
@@ -22,11 +23,11 @@ import utils.Input;
  *
  * @author bacda
  */
-public class Service {
+public class service {
     DAO<Flight> flightDAO;
     DAO<Reservation> reservationDAO;
     
-    public Service() {
+    public service() {
         flightDAO = new FlightDAO();
         reservationDAO = new ReservationDAO();
         
@@ -76,15 +77,34 @@ public class Service {
         String passengerContact = Input.inputNonBlankStr("Enter Contact Number: ");
         
         Passenger newPassenger = new Passenger(passengerName, passengerContact);
-        
-        int newSeat = availableSeats.get(0).getSeatNum();
 
-        Reservation newReservation = new Reservation(reservationID, newPassenger, reservationFlightCode, newSeat);
+        Reservation newReservation = new Reservation(reservationID, newPassenger, reservationFlightCode);
         reservationDAO.save(newReservation);
 
         // Update FlightSeat
         
         System.out.println("Added reservation successfully");
+    }
+    
+    public void checkIn() {
+        String reservationID = Input.inputValidCode("Reservation");
+        Optional<Reservation> selectedReservation = reservationDAO.get(reservationID);
+        if (selectedReservation.isEmpty()) {
+            System.out.println("Reservation not found!");
+            return;
+        }
+        
+        if (selectedReservation.get().getPreserveSeatName() != -1) {
+            System.out.println("The reservation has already been checked in!");
+            return;
+        }
+        
+        Flight selectedFlight = flightDAO.get(selectedReservation.get().getFlightID()).get();
+        
+        // show
+        // choose
+        // assign
+        // update
     }
     
     private Flight inputFlight() {
@@ -100,8 +120,8 @@ public class Service {
     private String checkFlightCodeExist() {
         while(true) {
             String code = Input.inputValidCode("Flight");
-            boolean isDuplicate = flightDAO.getAll().stream().anyMatch(item -> item.getFlightCode().equals(code));
-            if (isDuplicate) {
+            Optional<Flight> flight = flightDAO.get(code);
+            if (flight.isPresent()) {
                 System.err.println("Code already exists! Please enter again.");
             } else {
                 return code;

@@ -6,7 +6,7 @@
 package sample.controller;
 
 import model.BoardingPass;
-import model.CrewAssignment;
+import model.Crew;
 import model.Flight;
 import model.Passenger;
 import model.Reservation;
@@ -36,7 +36,7 @@ public class FlightList extends ArrayList<Flight> implements I_FlightList {
     List<Passenger> passengerList = new ArrayList<>();
     List<Reservation> reservationList = new ArrayList<>();
     List<BoardingPass> boardingPassList = new ArrayList<>();
-    List<CrewAssignment> crewAssignmentList = new ArrayList<>();
+    List<Crew> crewAssignmentList = new ArrayList<>();
     String fileName = "Product.dat";
 
 //------------------------------------------------------------------------------
@@ -225,7 +225,7 @@ public class FlightList extends ArrayList<Flight> implements I_FlightList {
                     int nPilots = Utils.getInt("Ïnput number of pilots (MAX=2): ", 1, 2);
                     int nFlightAttendants = Utils.getInt("Input number of flight attendants (MAX=10): ", 1, 10);
                     int nGroundStaffs = Utils.getInt("Input number of ground staffs (MAX=20): ", 1, 10);
-                    CrewAssignment nCrewAssignment = new CrewAssignment(f, nPilots, nFlightAttendants, nGroundStaffs);
+                    Crew nCrewAssignment = new Crew(f, nPilots, nFlightAttendants, nGroundStaffs);
                     crewAssignmentList.add(nCrewAssignment);
                     System.out.println("Create crew assignments successfully !!!");
                 }
@@ -279,12 +279,12 @@ public class FlightList extends ArrayList<Flight> implements I_FlightList {
             ObjectInputStream ois = new ObjectInputStream(fis);
             List<Flight> loadedFlightList = new ArrayList<>();
             List<Reservation> loadedReservationList = new ArrayList<>();
-            List<CrewAssignment> loadedCrewAssignmentList = new ArrayList<>();
+            List<Crew> loadedCrewAssignmentList = new ArrayList<>();
             while (true) {
                 try {
                     loadedFlightList = (List<Flight>) ois.readObject();
                     loadedReservationList = (List<Reservation>) ois.readObject();
-                    loadedCrewAssignmentList = (List<CrewAssignment>) ois.readObject();
+                    loadedCrewAssignmentList = (List<Crew>) ois.readObject();
 
                 } catch (ClassNotFoundException e) {
                     System.out.println(e);

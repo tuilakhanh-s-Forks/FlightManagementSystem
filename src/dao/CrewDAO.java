@@ -6,28 +6,25 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import model.Reservation;
+import model.Crew;
 
 /**
  *
  * @author bacda
  */
-public class ReservationDAO extends ArrayList<Reservation> implements DAO<Reservation> {
-    
+public class CrewDAO extends ArrayList<Crew> implements DAO<Crew> {
     @Override
     public ArrayList getAll() {
         return this;
     }
     
     @Override
-    public Optional<Reservation> get(String ReservationID) {
-        return this.stream()
-                .filter(item -> item.getReservationID() == ReservationID)
-                .findFirst();
+    public Optional<Crew> get(String crewID) {
+        return this.stream().filter(item -> item.getCrewID().equalsIgnoreCase(crewID)).findFirst();
     }
     
     @Override
-    public void save(Reservation reservation) {
-        this.add(reservation);
+    public void save(Crew crew) {
+        this.add(crew);
     }
 }

@@ -96,6 +96,7 @@ public class Flight implements Serializable {
     public void setTotalSeats(Seat[] totalSeats) {
         this.seats = seats;
     }
+    
     private void initializeSeats(int size){
         for (int i = 0; i < size; i++)
         {

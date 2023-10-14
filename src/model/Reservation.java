@@ -18,12 +18,11 @@ public class Reservation implements Serializable{
     private String flightID;
     private int preserveSeatName;
 
-    public Reservation(String reservationID, Passenger bookedPassengers, String flightID, int preserveSeatName) {
+    public Reservation(String reservationID, Passenger bookedPassengers, String flightID) {
         this.reservationID = reservationID;
         this.bookedPassengers = bookedPassengers;
         this.flightID = flightID;
-        this.preserveSeatName = preserveSeatName;
-        
+        this.preserveSeatName = -1;
     }
 
     public Reservation() {

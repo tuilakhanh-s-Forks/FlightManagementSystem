@@ -94,15 +94,16 @@ public class Input {
         String ftype = "";
         if (type.equals("Flight")) {
             ftype = "F";
-            regex = "F\\d{4}";
         } else if (type.equals("Crew Member")) {
             ftype = "E";
-            regex = "E\\d{4}";
+        } else if (type.equals("Reservation")) {
+            ftype = "R";
         }
+        regex = ftype + "\\d{4}";
         Pattern pattern = Pattern.compile(regex);
 
         do {
-            String temp = inputNonBlankStr("Enter the new " + type + " Code (Format " + ftype + "xxxx): ");
+            String temp = inputNonBlankStr("Enter the " + type + " Code (Format " + ftype + "xxxx): ");
             temp = temp.toUpperCase();
             Matcher matcher = pattern.matcher(temp);
 
