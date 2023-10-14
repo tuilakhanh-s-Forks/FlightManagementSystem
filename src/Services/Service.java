@@ -21,6 +21,8 @@ import dao.IDAO;
 import model.Crew;
 import model.CrewRole;
 import model.ProductData;
+import model.User;
+import model.UserRole;
 import utils.FileManager;
 import view.Menu;
 
@@ -30,17 +32,17 @@ import view.Menu;
  * @author bacda
  */
 public class Service {
-    IDAO<Flight> flightDAO;
-    IDAO<Reservation> reservationDAO;
-    IDAO<Crew> crewDAO;
-    FileManager fileManager;
+    private IDAO<Flight> flightDAO;
+    private IDAO<Reservation> reservationDAO;
+    private IDAO<Crew> crewDAO;
+    private FileManager fileManager;
+    private User currentUser;
     
     public Service() {
         flightDAO = new FlightDAO();
         reservationDAO = new ReservationDAO();
         crewDAO = new CrewDAO();
         fileManager = new FileManager();
-        
     }
     
     public void addFlight() {
@@ -290,6 +292,48 @@ public class Service {
         flightDAO.set(productData.getFlightList());
         reservationDAO.set(productData.getReservationList());
         crewDAO.set(productData.getCrewList());
+    }
+    
+    public void loginForm() {
+        int loginChoice;
+        do {
+            loginChoice = Menu.getChoice(Menu.USERTYPE_MENU);
+
+            switch (loginChoice) {
+                case 1:
+                    currentUser = new User("Passenger", "", UserRole.PASSENGER);
+                    System.out.println("Login Successfully!");
+                    break;
+                case 2:
+                    String temp = Input.inputNonBlankStr("Enter Password: ");
+                    if (temp.equalsIgnoreCase("staff")) {
+                        currentUser = new User("Staff", "staff", UserRole.STAFF);
+                        System.out.println("Login Successfully!");
+                    } else {
+                        currentUser = new User("Passenger", "", UserRole.PASSENGER);
+                        System.out.println("Login FAIL! Login As a Passenger!");
+                    }
+                    break;
+                case 3:
+                    String adminPassword = Input.inputNonBlankStr("Enter Password: ");
+                    if (adminPassword.equalsIgnoreCase("admin")) {
+                        currentUser = new User("admin", "admin", UserRole.ADMIN);
+                        System.out.println("Login Successfully!");
+                    } else {
+                        currentUser = new User("Passenger", "", UserRole.PASSENGER);
+                        System.out.println("Login FAIL! Login as a Passenger!");
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid choice! Enter again!");
+                    continue;
+            }
+            return;
+        } while (true);
+    }
+    
+    public UserRole getUserRole() {
+        return currentUser.getRole();
     }
     
     private Flight inputFlight() {

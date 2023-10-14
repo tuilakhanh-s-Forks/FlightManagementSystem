@@ -5,6 +5,7 @@
 package view;
 
 import Services.Service;
+import model.UserRole;
 import utils.Input;
 
 /**
@@ -16,7 +17,7 @@ public class Program {
         
         Service service = new Service();
         service.loadFormFile();
-//        service.loginForm();
+        service.loginForm();
         int choice = -1;
         do
         {            
@@ -29,7 +30,11 @@ public class Program {
                     else
                         System.out.println("Back to main menu!");
                     break;
-                case 1: 
+                case 1:
+                    if (service.getUserRole() == UserRole.PASSENGER) {
+                        System.out.println("You do not have the permission to add flights!");
+                        continue;
+                    }
                     service.addFlight();
                     break;
                 case 2:
@@ -48,7 +53,7 @@ public class Program {
                     service.ShowAll();
                     break;
                 case 7:
-//                        service.loginForm();
+                    service.loginForm();
                     break;
             }
         } while (choice != -1);

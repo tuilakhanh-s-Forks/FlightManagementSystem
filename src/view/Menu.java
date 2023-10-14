@@ -35,7 +35,7 @@ public class Menu {
     {
         "Login As Passenger",
         "Login As Airline Staff",
-        "3. Login As Administrator"
+        "Login As Administrator"
     };
     public static final String[] CREWTYPE_MENU =
     {
