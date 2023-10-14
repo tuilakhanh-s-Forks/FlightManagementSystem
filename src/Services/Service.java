@@ -4,6 +4,7 @@
  */
 package Services;
 
+import dao.CrewDAO;
 import dao.FlightDAO;
 import dao.ReservationDAO;
 import java.time.LocalDate;
@@ -17,6 +18,9 @@ import model.Reservation;
 import model.Seat;
 import utils.Input;
 import dao.IDAO;
+import model.Crew;
+import model.CrewRole;
+import view.Menu;
 
 
 /**
@@ -26,10 +30,12 @@ import dao.IDAO;
 public class Service {
     IDAO<Flight> flightDAO;
     IDAO<Reservation> reservationDAO;
+    IDAO<Crew> crewDAO;
     
     public Service() {
         flightDAO = new FlightDAO();
         reservationDAO = new ReservationDAO();
+        crewDAO = new CrewDAO();
         
     }
     
@@ -38,7 +44,7 @@ public class Service {
             Flight flight = inputFlight();
             flightDAO.save(flight);
             //The application asks to continuous create new product or go back to the main
-            if(!Input.checkYesOrNo("Do you want to continue to add product in the collection ( Y/N ) ")){
+            if(!Input.checkYesOrNo("Do you want to continue to add product in the collection (Y/N): ")){
                 // TO do
                 // System.out.println("Successfully add product: " + newProduct);
                 return;
@@ -74,7 +80,7 @@ public class Service {
         String reservationFlightCode = chosseFlight.getFlightCode();
 
         
-        String passengerName = Input.inputNonBlankStr("Please enter the name:");
+        String passengerName = Input.inputNonBlankStr("Please enter the name: ");
         String passengerContact = Input.inputNonBlankStr("Enter Contact Number: ");
         
         Passenger newPassenger = new Passenger(passengerName, passengerContact);
@@ -124,12 +130,148 @@ public class Service {
         }
     }
     
+    public void addCrewMember() {
+        String crewID = Input.inputValidCode("Crew Member");
+
+        // add if it's empty , and check if there is duplicate code
+        if (crewDAO.getAll().isEmpty()) {
+            for (Crew crew : crewDAO.getAll()) {
+                if (crew.getCrewID().equalsIgnoreCase(crewID)) {
+                    System.out.println("The ID is existed! Return to main menu..");
+                    return;
+                }
+            }
+        }
+
+        String name = Input.inputNonBlankStr("Enter crew member Name:");
+        CrewRole role;
+        int subChoice = Menu.getChoice(Menu.CREWTYPE_MENU);
+        switch (subChoice) {
+            case 1:
+                System.out.println("Assigning member as Pilot");
+                role = CrewRole.PILOT;
+                break;
+            case 2:
+                System.out.println("Assigning member as Ground Staff");
+                role = CrewRole.GROUND_STAFF;
+                break;
+            case 3:
+                System.out.println("Assigning member as Flight Attendant");
+                role = CrewRole.FLIGHT_ATTENDANT;
+                break;
+            default:
+                System.out.println("Invalid choice! return to main menu");
+                return;
+        }
+
+        Crew newCrew = new Crew(crewID, name, role);
+
+        crewDAO.save(newCrew);
+        System.out.println("Add new member successfully!");
+    }
+    
+    public void assignCrewMember() {
+        if (crewDAO.getAll().isEmpty()) {
+            System.out.println("Crew member is empty!");
+            return;
+        }
+
+        System.out.println(crewDAO);
+
+        String crewID = Input.inputValidCode("Crew Member");
+        Optional<Crew> crewMember = crewDAO.get(crewID);
+        if (crewMember.isEmpty()) {
+            System.out.println("Crew member not found!");
+            return;
+        }
+
+        System.out.println(flightDAO);
+
+        String flightID = Input.inputValidCode("Flight");
+
+        Optional<Flight> flight = flightDAO.get(flightID);
+        
+        if (flight.isEmpty()) {
+            System.out.println("Flight not found!");
+            return;
+        }
+        
+
+        if (crewMember.get().getCurrentFlight() != null) {
+            System.out.println("Crew member is already on a flight!");
+            return;
+        }
+
+        crewMember.get().setCurrentFlight(flight.get());
+        flightDAO.get(flightID).get().getCrews().add(crewID);
+
+        System.out.println("Crew member assigned successfully!");
+    }
+    
+    public void deleteCrewMember() {
+        if (crewDAO.getAll().isEmpty()) {
+            System.out.println("Crew member is empty!");
+            return;
+        }
+        
+        String crewID = Input.inputValidCode("Crew Member");
+        Optional<Crew> crewMember = crewDAO.get(crewID);
+        if (crewMember.isEmpty()) {
+            System.out.println("Crew member not found!");
+            return;
+        }
+        
+        crewDAO.getAll().remove(crewMember.get());
+    }
+    
+    public void updateCrew() {
+         if (crewDAO.getAll().isEmpty()) {
+            System.out.println("Crew member is empty!");
+            return;
+        }
+        
+        String crewID = Input.inputValidCode("Crew Member");
+        Optional<Crew> crewMember = crewDAO.get(crewID);
+        if (crewMember.isEmpty()) {
+            System.out.println("Crew member not found!");
+            return;
+        }
+        if (crewMember.get().getCurrentFlight() != null) {
+            System.out.println("Crew member is in flight, Canot update");
+            return;
+        }
+        String name = Input.inputNonBlankStr("Enter crew member Name:");
+        CrewRole role;
+        int subChoice = Menu.getChoice(Menu.CREWTYPE_MENU);
+        switch (subChoice) {
+            case 1:
+                System.out.println("Assigning member as Pilot");
+                role = CrewRole.PILOT;
+                break;
+            case 2:
+                System.out.println("Assigning member as Ground Staff");
+                role = CrewRole.GROUND_STAFF;
+                break;
+            case 3:
+                System.out.println("Assigning member as Flight Attendant");
+                role = CrewRole.FLIGHT_ATTENDANT;
+                break;
+            default:
+                System.out.println("Invalid choice! return to main menu");
+                return;
+        }
+        crewMember.get().setCrewName(name);
+        crewMember.get().setCrewRole(role);
+    }
     
     
     public void ShowAll() {
-        System.out.println(flightDAO);
-        System.out.println(reservationDAO);
-//        System.out.println();
+        System.out.println("Flight List");
+        System.out.print(flightDAO);
+        System.out.println("Reservation List");
+        System.out.print(reservationDAO);
+        System.out.println("Crew List");
+        System.out.print(crewDAO);
     }
     
     private Flight inputFlight() {

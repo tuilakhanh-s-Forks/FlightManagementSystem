@@ -20,43 +20,36 @@ public class Program {
         int choice = -1;
         do
         {            
-            try
-            {
-                choice = Menu.getChoice(Menu.MAIN_MENU);
-                switch(choice){
-                    case 0:
-                        Boolean check = Input.checkYesOrNo("Do you want to quit? (y/n): ");
-                        if(check)
-                            choice = -1;
-                        else
-                            System.out.println("Back to main menu!");
-                        break;
-                    case 1: 
-//                        if(service.getCurrentUser().getRole().equalsIgnoreCase("admin") || service.getCurrentUser().getRole().equalsIgnoreCase("staff"))
-                        service.addFlight();
-                        break;
-                    case 2:
-                        service.makeReservation();
-                        break;
-                    case 3:
-//                        service.check_Ins();
-                        break;
-                    case 4:
+            choice = Menu.getChoice(Menu.MAIN_MENU);
+            switch(choice){
+                case 0:
+                    Boolean check = Input.checkYesOrNo("Do you want to quit? (y/n): ");
+                    if(check)
+                        choice = -1;
+                    else
+                        System.out.println("Back to main menu!");
+                    break;
+                case 1: 
+                    service.addFlight();
+                    break;
+                case 2:
+                    service.makeReservation();
+                    break;
+                case 3:
+                    service.checkIn();
+                    break;
+                case 4:
 //                        service.crewAssignment();
-                        break;
-                    case 5:
+                    break;
+                case 5:
 //                        service.saveToFile();
-                        break;
-                    case 6:
-                        service.ShowAll();
-                        break;
-                    case 7:
+                    break;
+                case 6:
+                    service.ShowAll();
+                    break;
+                case 7:
 //                        service.loginForm();
-                        break;
-                }
-            } catch (Exception e)
-            {
-                System.out.println("Your choice is invalid!");
+                    break;
             }
         } while (choice != -1);
     }

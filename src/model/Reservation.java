@@ -68,7 +68,7 @@ public class Reservation implements Serializable{
         sb.append(", bookedPassengers='").append(getBookedPassengers()).append(", ");
         sb.append(", flightID='").append(getFlightID()).append(", ");
         sb.append(", preserveSeatName='").append(getPreserveSeatName()).append(", ");
-        sb.append('}');
+        sb.append("}\n");
         return sb.toString();
     }
 }

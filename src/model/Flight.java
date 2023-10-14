@@ -8,6 +8,7 @@ package model;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class Flight implements Serializable {
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
     private List<Seat> seats;
+    private List<String> crews;
 
     public Flight() {
     }
@@ -37,6 +39,7 @@ public class Flight implements Serializable {
         for (int i = 0; i < totalSeats; i++) {
             seats.add(new Seat(i + 1));
         }
+        this.crews = new ArrayList<>();
     }
 
     public String getFlightCode() {
@@ -97,18 +100,21 @@ public class Flight implements Serializable {
         this.seats = seats;
     }
    
+    public List<String> getCrews() {
+        return crews;
+    }
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         final StringBuilder sb = new StringBuilder("Flight{");
         sb.append("flightNumber='").append(flightCode).append(", ");
         sb.append(", departureCity='").append(departureCity).append(", ");
         sb.append(", destinationCity='").append(destinationCity).append(", ");
-        sb.append(", departureTime=").append(sdf.format(departureTime)).append(", ");;
-        sb.append(", arrivalTime=").append(sdf.format(arrivalTime)).append(", ");;
-        sb.append(", Seats=").append(seats);
-        sb.append('}');
+        sb.append(", departureTime=").append(departureTime.format(formatter)).append(", ");;
+        sb.append(", arrivalTime=").append(arrivalTime.format(formatter)).append(", ");;
+        sb.append(", Seats=").append(seats.size());
+        sb.append("}\n");
         return sb.toString();
     }
 }

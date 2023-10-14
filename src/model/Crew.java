@@ -17,11 +17,10 @@ public class Crew implements Serializable {
     private CrewRole crewRole;
     private Flight currentFlight;
 
-    public Crew(String crewID, String currentName, Flight currentFlight, CrewRole crewRole) {
+    public Crew(String crewID, String currentName, CrewRole crewRole) {
         this.crewID = crewID;
         this.crewName = currentName;
         this.crewRole = crewRole;
-        this.currentFlight = currentFlight;
     }
     
     public String getCrewID() {
@@ -63,7 +62,7 @@ public class Crew implements Serializable {
         sb.append(", name='").append(crewName).append(", ");
         sb.append(", role='").append(crewRole).append(", ");
         sb.append(", currentFlight=").append(currentFlight.getFlightCode());
-        sb.append('}');
+        sb.append("}\n");
         return sb.toString();
     }
 
