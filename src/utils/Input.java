@@ -4,8 +4,12 @@
  */
 package utils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +26,13 @@ import view.Menu;
 public class Input {
 
     public static final Scanner sc = new Scanner(System.in);
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter DATETIME_FORMATTER_WITHOUT_SECONDS = new DateTimeFormatterBuilder().append(DATETIME_FORMATTER)
+        .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+        .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+        .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+        .toFormatter();
+    private static final DateTimeFormatter DATETIME_FORMATTER_WITH_SECONDS = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     public static String inputNonBlankStr(String mess) {
         String temp = null;
@@ -143,7 +153,18 @@ public class Input {
         }
 
         // Set the default date to the current date if the date string is empty.
-        LocalDateTime depDate = depDateStr.isEmpty() ? LocalDateTime.now() : LocalDateTime.parse(depDateStr, DATE_TIME_FORMATTER);
+        LocalDateTime depDate = null;
+        try {
+            depDate = LocalDateTime.parse(depDateStr, DATETIME_FORMATTER_WITHOUT_SECONDS);
+        } catch (DateTimeParseException e) {
+            // If the date string cannot be parsed in the DD/MM/YYYY format, try to parse it in the DD/MM/YYYY HH:mm:ss format.
+            try {
+                depDate = LocalDateTime.parse(depDateStr, DATETIME_FORMATTER_WITH_SECONDS);;
+            } catch (DateTimeParseException e2) {
+                // If the date string cannot be parsed in either format, throw an exception.
+                throw new IllegalArgumentException("Invalid date and time format: " + depDateStr);
+            }
+        }
 
         // Set the default time to 00:00:00 if the time is not specified in the date string.
         if (!depDateStr.contains(":")) {

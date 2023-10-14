@@ -34,8 +34,6 @@ public class Program {
                     case 1: 
 //                        if(service.getCurrentUser().getRole().equalsIgnoreCase("admin") || service.getCurrentUser().getRole().equalsIgnoreCase("staff"))
                         service.addFlight();
-//                        else
-//                            System.out.println("You do not have the permission to add flights!");
                         break;
                     case 2:
                         service.makeReservation();

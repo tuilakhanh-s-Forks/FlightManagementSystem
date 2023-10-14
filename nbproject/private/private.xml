@@ -13,9 +13,6 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/model/Flight.java</file>
-            <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/model/BoardingPass.java</file>
-            <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/view/FlightManagement.java</file>
-            <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/sample/controller/FlightList.java</file>
             <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/utils/FileManager.java</file>
             <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/dao/FlightDAO.java</file>
             <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/model/ProductData.java</file>
@@ -24,12 +21,14 @@
             <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/utils/Utils.java</file>
             <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/model/CrewRole.java</file>
             <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/dao/CrewDAO.java</file>
+            <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/view/Main.java</file>
+            <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/dao/IDAO.java</file>
             <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/model/Crew.java</file>
-            <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/dao/DAO.java</file>
             <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/model/Reservation.java</file>
-            <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/Services/service.java</file>
             <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/dao/ReservationDAO.java</file>
             <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/model/Passenger.java</file>
+            <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/view/Program.java</file>
+            <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/Services/Service.java</file>
             <file>file:/C:/Users/bacda/Desktop/FlightManagementSystem/src/utils/Input.java</file>
         </group>
     </open-files>
