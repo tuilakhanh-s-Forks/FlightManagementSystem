@@ -162,9 +162,9 @@ public class Input {
         while (true) {
             LocalDateTime arrTime = inputTime();
 
-            if (arrTime.isAfter(depTime)) {
+            if (!arrTime.isAfter(depTime)) {
                 System.out.println("The arrival time must be after the departure time!");
-                return arrTime;
+                continue;
             }
 
             if (arrTime.toLocalDate().isEqual(depTime.toLocalDate())) {
@@ -175,6 +175,7 @@ public class Input {
                     return depTime.plusHours(1);
                 }
             }
+            return arrTime;
         }
     }
     
