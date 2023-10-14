@@ -15,40 +15,40 @@ public class Menu {
 
     public static final String[] MAIN_MENU =
     {
-        "1. Flight Schedule Management",
-        "2. Passenger Reservation and booking",
-        "3. Passenger Check-In and Seat Allocation and Availability",
-        "4. Crew Management and Assignments",
-        "5. Save to file ",
-        "6. Print all lists from file ",
-        "7. Log in as Administrator",
-        "0. Quit the program"
+        "Flight Schedule Management",
+        "Passenger Reservation and booking",
+        "Passenger Check-In and Seat Allocation and Availability",
+        "Crew Management and Assignments",
+        "Save to file ",
+        "Print all lists from file ",
+        "Log in as Administrator",
+        "Quit the program"
     };
     public static final String[] SEARCH_MENU =
     {
 
-        "1. Search flight by date",
-        "2. Search flight by departure location",
-        "3. Seach flight by destination location"
+        "Search flight by date",
+        "Search flight by departure location",
+        "Seach flight by destination location"
     };
     public static final String[] USERTYPE_MENU =
     {
-        "1. Login As Passenger",
-        "2. Login As Airline Staff",
+        "Login As Passenger",
+        "Login As Airline Staff",
         "3. Login As Administrator"
     };
     public static final String[] CREWTYPE_MENU =
     {
-        "1. Pilot",
-        "2. Ground Staff",
-        "3. Flight Attendant"
+        "Pilot",
+        "Ground Staff",
+        "Flight Attendant"
     };
     public static final String[] CREW_MENU =
     {
-        "1. Add a crew member (Administrator only)",
-        "2. Update a crew member (Administrator only) ",
-        "3. Delete a crew member (Administrator only) ",
-        "4. Assign a crew member",
+        "Add a crew member (Administrator only)",
+        "Update a crew member (Administrator only) ",
+        "Delete a crew member (Administrator only) ",
+        "Assign a crew member",
     };
     
     public static int getChoice(String[] menu) {
