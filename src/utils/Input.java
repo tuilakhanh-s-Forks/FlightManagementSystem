@@ -18,7 +18,7 @@ import view.Menu;
 
 /**
  *
- * @author bacda
+ * @author buiductrieu
  */
 public class Input {
 

@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author LENOVO
+ * @author buiductrieu
  */
 public class Reservation implements Serializable{
 

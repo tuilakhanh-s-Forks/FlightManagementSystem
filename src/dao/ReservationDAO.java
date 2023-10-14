@@ -11,7 +11,7 @@ import utils.Utils;
 
 /**
  *
- * @author bacda
+ * @author buiductrieu
  */
 public class ReservationDAO extends ArrayList<Reservation> implements IDAO<Reservation> {
     

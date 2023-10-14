@@ -9,7 +9,7 @@ package view;
 
 /**
  *
- * @author LENOVO
+ * @author buiductrieu
  */
 public class Main {
 

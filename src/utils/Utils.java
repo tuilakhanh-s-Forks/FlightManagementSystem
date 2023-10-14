@@ -10,7 +10,7 @@ import model.Flight;
 
 /**
  *
- * @author LENOVO
+ * @author buiductrieu
  */
 public class Utils {
     public static Comparator<Flight> dateDesc = new Comparator<Flight>() {

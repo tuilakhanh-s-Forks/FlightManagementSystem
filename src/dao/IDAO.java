@@ -9,7 +9,7 @@ import java.util.Optional;
 
 /**
  *
- * @author bacda
+ * @author buiductrieu
  */
 public interface IDAO<T> {
     ArrayList<T> getAll();

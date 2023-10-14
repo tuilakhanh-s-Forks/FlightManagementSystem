@@ -13,7 +13,7 @@ import model.Reservation;
 
 /**
  *
- * @author bacda
+ * @author buiductrieu
  */
 public class FileManager {
     public static final String PRODUCT_PATH = "./Product.dat";

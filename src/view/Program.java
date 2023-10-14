@@ -10,7 +10,7 @@ import utils.Input;
 
 /**
  *
- * @author bacda
+ * @author buiductrieu
  */
 public class Program {
     public void executed() {
@@ -19,9 +19,12 @@ public class Program {
         service.loadFormFile();
         service.loginForm();
         int choice = -1;
+        boolean isContinue = false;
         do
         {            
-            choice = Menu.getChoice(Menu.MAIN_MENU);
+            if (!isContinue) {
+                choice = Menu.getChoice(Menu.MAIN_MENU);
+            }
             switch(choice){
                 case 0:
                     Boolean check = Input.checkYesOrNo("Do you want to quit? (y/n): ");
@@ -55,7 +58,10 @@ public class Program {
                 case 7:
                     service.loginForm();
                     break;
+                case 8:
+                    return;
             }
+            isContinue = Input.checkYesOrNo("Do you want to redo this function? (Y/N): ");
         } while (choice != -1);
     }
 }

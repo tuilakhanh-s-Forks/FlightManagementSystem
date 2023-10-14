@@ -9,7 +9,7 @@ import utils.Input;
 
 /**
  *
- * @author LENOVO
+ * @author buiductrieu
  */
 public class Menu {
 

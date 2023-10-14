@@ -11,7 +11,7 @@ import utils.Utils;
 
 /**
  *
- * @author bacda
+ * @author buiductrieu
  */
 public class FlightDAO extends ArrayList<Flight> implements IDAO<Flight> {
     

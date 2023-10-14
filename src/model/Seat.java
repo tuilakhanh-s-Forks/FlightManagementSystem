@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author bacda
+ * @author buiductrieu
  */
 public class Seat implements Serializable{
 

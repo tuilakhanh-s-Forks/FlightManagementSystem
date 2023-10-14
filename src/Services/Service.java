@@ -29,7 +29,7 @@ import view.Menu;
 
 /**
  *
- * @author bacda
+ * @author buiductrieu
  */
 public class Service {
     private IDAO<Flight> flightDAO;

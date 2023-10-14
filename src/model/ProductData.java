@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author bacda
+ * @author buiductrieu
  */
 public class ProductData implements Serializable {
 

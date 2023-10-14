@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author bacda
+ * @author buiductrieu
  */
 public enum UserRole {
     PASSENGER("Passenger"),

@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *
- * @author LENOVO
+ * @author buiductrieu
  */
 public class Flight implements Serializable {
 

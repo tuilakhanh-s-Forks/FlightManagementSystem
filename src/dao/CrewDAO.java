@@ -10,7 +10,7 @@ import model.Crew;
 
 /**
  *
- * @author bacda
+ * @author buiductrieu
  */
 public class CrewDAO extends ArrayList<Crew> implements IDAO<Crew> {
     @Override
