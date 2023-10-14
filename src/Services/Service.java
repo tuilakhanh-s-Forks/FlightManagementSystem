@@ -49,10 +49,8 @@ public class Service {
         while(true){
             Flight flight = inputFlight();
             flightDAO.save(flight);
-            //The application asks to continuous create new product or go back to the main
+            System.out.println("Successfully add flight:\n" + flight);
             if(!Input.checkYesOrNo("Do you want to continue to add product in the collection (Y/N): ")){
-                // TO do
-                // System.out.println("Successfully add product: " + newProduct);
                 return;
             }
         }
@@ -136,7 +134,7 @@ public class Service {
         }
     }
     
-    public void addCrewMember() {
+    public void addCrew() {
         String crewID = Input.inputValidCode("Crew Member");
 
         // add if it's empty , and check if there is duplicate code
@@ -176,7 +174,7 @@ public class Service {
         System.out.println("Add new member successfully!");
     }
     
-    public void assignCrewMember() {
+    public void assignCrew() {
         if (crewDAO.getAll().isEmpty()) {
             System.out.println("Crew member is empty!");
             return;
@@ -214,7 +212,7 @@ public class Service {
         System.out.println("Crew member assigned successfully!");
     }
     
-    public void deleteCrewMember() {
+    public void deleteCrew() {
         if (crewDAO.getAll().isEmpty()) {
             System.out.println("Crew member is empty!");
             return;
@@ -334,6 +332,36 @@ public class Service {
     
     public UserRole getUserRole() {
         return currentUser.getRole();
+    }
+    
+    public void crewAssignMent() {
+        if (currentUser.getRole() == UserRole.PASSENGER) {
+            System.out.println("You do not have permission! Only Staff and Administrators can use this.");
+            return;
+        }
+
+        System.out.println("You are logged in as " + currentUser + "!");
+        int subChoice = Menu.getChoice(Menu.CREW_MENU);
+
+        if (currentUser.getRole() == UserRole.STAFF) {
+            System.out.println("Only Administrators have permission.");
+            return;
+        }
+
+        switch (subChoice) {
+            case 1:
+                addCrew();
+                break;
+            case 2:
+                updateCrew();
+                break;
+            case 3:
+                deleteCrew();
+                break;
+            case 4:
+                assignCrew();
+                break;
+        }
     }
     
     private Flight inputFlight() {

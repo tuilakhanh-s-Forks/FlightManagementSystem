@@ -44,7 +44,7 @@ public class Program {
                     service.checkIn();
                     break;
                 case 4:
-//                        service.crewAssignment();
+                    service.crewAssignMent();
                     break;
                 case 5:
                     service.saveToFile();
