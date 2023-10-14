@@ -215,7 +215,7 @@ public class Input {
     }
 
     private static void validateDateStr(String dateStr) {
-        String regex = "\\d{2}/\\d{2}/\\d{4}";
+        String regex = "\\d{2}/\\d{2}/\\d{4}( \\d{2}:\\d{2}:\\d{2})?";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(dateStr);
 
