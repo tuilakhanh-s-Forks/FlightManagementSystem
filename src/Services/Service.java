@@ -20,6 +20,8 @@ import utils.Input;
 import dao.IDAO;
 import model.Crew;
 import model.CrewRole;
+import model.ProductData;
+import utils.FileManager;
 import view.Menu;
 
 
@@ -31,11 +33,13 @@ public class Service {
     IDAO<Flight> flightDAO;
     IDAO<Reservation> reservationDAO;
     IDAO<Crew> crewDAO;
+    FileManager fileManager;
     
     public Service() {
         flightDAO = new FlightDAO();
         reservationDAO = new ReservationDAO();
         crewDAO = new CrewDAO();
+        fileManager = new FileManager();
         
     }
     
@@ -221,7 +225,7 @@ public class Service {
             return;
         }
         
-        crewDAO.getAll().remove(crewMember.get());
+        crewDAO.delete(crewMember.get());
     }
     
     public void updateCrew() {
@@ -272,6 +276,20 @@ public class Service {
         System.out.print(reservationDAO);
         System.out.println("Crew List");
         System.out.print(crewDAO);
+    }
+    
+    public void saveToFile() {
+        fileManager.saveToFile(flightDAO.getAll(), crewDAO.getAll(), reservationDAO.getAll());
+    }
+    
+    public void loadFormFile() {
+        ProductData productData = fileManager.loadFromFile();
+        if (productData == null) {
+            return;
+        }
+        flightDAO.set(productData.getFlightList());
+        reservationDAO.set(productData.getReservationList());
+        crewDAO.set(productData.getCrewList());
     }
     
     private Flight inputFlight() {

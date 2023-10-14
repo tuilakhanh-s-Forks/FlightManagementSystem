@@ -24,8 +24,19 @@ public class CrewDAO extends ArrayList<Crew> implements IDAO<Crew> {
     }
     
     @Override
+    public void set(ArrayList<Crew> crewList) {
+        this.clear();
+        this.addAll(crewList);
+    }
+    
+    @Override
     public void save(Crew crew) {
         this.add(crew);
+    }
+    
+    @Override
+    public void delete(Crew crew) {
+        this.remove(crew);
     }
     
     @Override

@@ -15,10 +15,11 @@ public interface IDAO<T> {
     ArrayList<T> getAll();
  
     Optional<T> get(String id);
+    
+    void set(ArrayList<T> t);
  
     void save(T t);
  
-    //void update(T t);
- 
-    //void delete(T t);
+    void delete(T t);
+    
 }

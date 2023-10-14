@@ -15,7 +15,7 @@ public class Program {
     public void executed() {
         
         Service service = new Service();
-//        service.loadFromFile();
+        service.loadFormFile();
 //        service.loginForm();
         int choice = -1;
         do
@@ -42,7 +42,7 @@ public class Program {
 //                        service.crewAssignment();
                     break;
                 case 5:
-//                        service.saveToFile();
+                    service.saveToFile();
                     break;
                 case 6:
                     service.ShowAll();

@@ -28,8 +28,19 @@ public class ReservationDAO extends ArrayList<Reservation> implements IDAO<Reser
     }
     
     @Override
+    public void set(ArrayList<Reservation> reservationList) {
+        this.clear();
+        this.addAll(reservationList);
+    }
+    
+    @Override
     public void save(Reservation reservation) {
         this.add(reservation);
+    }
+    
+    @Override
+    public void delete(Reservation reservation) {
+        this.remove(reservation);
     }
     
     @Override

@@ -6,6 +6,7 @@ package utils;
 
 import java.io.*;
 import java.util.ArrayList;
+import model.Crew;
 import model.Flight;
 import model.ProductData;
 import model.Reservation;
@@ -18,51 +19,30 @@ public class FileManager {
     public static final String PRODUCT_PATH = "./Product.dat";
 
 
-    public FileManager() {
-
-    }
-
-
-    public void saveToFile(ArrayList<Flight> flightList, ArrayList<Reservation> reservations) {
-        // add existing data of flight,crew, reservation management
-
-        ProductData productData = new ProductData(flightList, reservations);
+    public void saveToFile(ArrayList<Flight> flightList, ArrayList<Crew> crewList, ArrayList<Reservation> reservations) {
+        ProductData productData = new ProductData(flightList, crewList, reservations);
 
 
-        try (FileOutputStream fos = new FileOutputStream(new File(PRODUCT_PATH));
-           ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-
-          oos.writeObject(productData);
-          System.out.println("    Save Product.dat to file successfully !");
-        } catch (FileNotFoundException e) {
-          e.printStackTrace();
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PRODUCT_PATH))) {
+            oos.writeObject(productData);
+            System.out.println("Save Product.dat to file successfully!");
         } catch (IOException e) {
-          e.printStackTrace();
-
+            e.printStackTrace();
         }
 
     }
 
 
-    private ProductData loadProductData() throws FileNotFoundException, IOException, ClassNotFoundException {
-
-        FileInputStream fis = new FileInputStream(new File(PRODUCT_PATH));
-
-        ObjectInputStream ois = new ObjectInputStream(fis);
-
+    public ProductData loadFromFile() {
         ProductData productData = null;
 
-        try {
-
-          productData = (ProductData) ois.readObject();
-
-        } catch (EOFException e) {
-
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PRODUCT_PATH))) {
+            productData = (ProductData) ois.readObject();
+            System.out.println("Load Product.dat from file successfully!");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        ois.close();
-        if (productData != null) {
-          System.out.println("    Load Product.dat from file successfully !");
-        }
+        
         return productData;
     }
 }

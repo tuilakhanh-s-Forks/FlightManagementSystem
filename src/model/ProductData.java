@@ -14,24 +14,25 @@ import java.util.ArrayList;
 public class ProductData implements Serializable {
 
     private ArrayList<Flight> flightList;
-    // private ArrayList<Employee> crewList;
-    private ArrayList<Reservation> reservations;
+    private ArrayList<Crew> crewList;
+    private ArrayList<Reservation> reservationList;
 
-    public ProductData(ArrayList<Flight> flightList, ArrayList<Reservation> reservations) {
+    public ProductData(ArrayList<Flight> flightList, ArrayList<Crew> crewList, ArrayList<Reservation> reservations) {
         this.flightList = flightList;
-        this.reservations = reservations;
+        this.crewList = crewList;
+        this.reservationList = reservations;
     }
 
-    public ArrayList<Flight> getFlightManagement() {
+    public ArrayList<Flight> getFlightList() {
         return flightList;
     }
 
-//    public List<Employee> getCrewList() {
-//        return crewList;
-//    }
+    public ArrayList<Crew> getCrewList() {
+        return crewList;
+    }
 
-    public ArrayList<Reservation> getReservations() {
-        return reservations;
+    public ArrayList<Reservation> getReservationList() {
+        return reservationList;
     }
 }
 

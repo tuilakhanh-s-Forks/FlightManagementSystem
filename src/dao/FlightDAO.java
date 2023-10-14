@@ -26,8 +26,19 @@ public class FlightDAO extends ArrayList<Flight> implements IDAO<Flight> {
     }
     
     @Override
+    public void set(ArrayList<Flight> flightList) {
+        this.clear();
+        this.addAll(flightList);
+    }
+    
+    @Override
     public void save(Flight flight) {
         this.add(flight);
+    }
+    
+    @Override
+    public void delete(Flight flight) {
+        this.remove(flight);
     }
     
     @Override
