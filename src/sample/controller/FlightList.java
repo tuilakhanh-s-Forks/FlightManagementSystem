@@ -5,12 +5,12 @@
  */
 package sample.controller;
 
-import sample.model.BoardingPass;
-import sample.model.CrewAssignment;
-import sample.model.Flight;
-import sample.model.Passenger;
-import sample.model.Reservation;
-import sample.utils.Utils;
+import model.BoardingPass;
+import model.CrewAssignment;
+import model.Flight;
+import model.Passenger;
+import model.Reservation;
+import utils.Utils;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
