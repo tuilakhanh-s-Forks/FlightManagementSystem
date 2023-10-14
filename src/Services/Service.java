@@ -99,6 +99,7 @@ public class Service {
     
     public void checkIn() {
         if (reservationDAO.getAll().isEmpty()) {
+            System.out.println("Reservation is empty");
             return;
         }
         System.out.print(reservationDAO);
