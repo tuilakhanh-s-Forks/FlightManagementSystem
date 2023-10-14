@@ -59,9 +59,9 @@ public class Crew implements Serializable {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Employee{");
-        sb.append("empID='").append(crewID).append('\'');
-        sb.append(", name='").append(crewName).append('\'');
-        sb.append(", role='").append(crewRole).append('\'');
+        sb.append("empID='").append(crewID).append(", ");
+        sb.append(", name='").append(crewName).append(", ");
+        sb.append(", role='").append(crewRole).append(", ");
         sb.append(", currentFlight=").append(currentFlight.getFlightCode());
         sb.append('}');
         return sb.toString();

@@ -4,7 +4,6 @@
  */
 package Services;
 
-import dao.DAO;
 import dao.FlightDAO;
 import dao.ReservationDAO;
 import java.time.LocalDate;
@@ -17,17 +16,18 @@ import model.Passenger;
 import model.Reservation;
 import model.Seat;
 import utils.Input;
+import dao.IDAO;
 
 
 /**
  *
  * @author bacda
  */
-public class service {
-    DAO<Flight> flightDAO;
-    DAO<Reservation> reservationDAO;
+public class Service {
+    IDAO<Flight> flightDAO;
+    IDAO<Reservation> reservationDAO;
     
-    public service() {
+    public Service() {
         flightDAO = new FlightDAO();
         reservationDAO = new ReservationDAO();
         
@@ -67,6 +67,7 @@ public class service {
             return;
         }
         
+        availableSeats.get(0).setBooked(true);
         
         String reservationID = String.format("R%04d", reservationDAO.getAll().size() + 1);
 
@@ -101,10 +102,32 @@ public class service {
         
         Flight selectedFlight = flightDAO.get(selectedReservation.get().getFlightID()).get();
         
-        // show
-        // choose
-        // assign
-        // update
+        int selectedSeatNum = Input.inputSeat(selectedFlight.getSeats());
+        
+        for (Seat seat : selectedFlight.getSeats()) {
+            if (seat.getSeatNum() == selectedSeatNum) {
+                if (seat.isOccupied()) {
+                    System.out.println("Seat is Occupied");
+                    return;
+                }
+                seat.setOccupied(true);
+                selectedReservation.get().setPreserveSeatName(seat.getSeatNum());
+                System.out.println("Assigned seat");
+                StringBuilder sb = new StringBuilder();
+                sb.append("BoardingPass{ ");
+                sb.append(selectedReservation.get().getBookedPassengers()).append(", ");
+                sb.append("Flight Number='").append(selectedFlight.getFlightCode()).append(", ");
+                sb.append(", Seat Number=").append(selectedSeatNum).append("}");
+                System.out.println(sb);
+                break;
+            }
+        }
+    }
+    
+    public void ShowAll() {
+        System.out.println(flightDAO);
+        System.out.println(reservationDAO);
+//        System.out.println();
     }
     
     private Flight inputFlight() {

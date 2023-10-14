@@ -64,10 +64,10 @@ public class Reservation implements Serializable{
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Reservation{");
-        sb.append("reservationID='").append(getReservationID()).append('\'');
-        sb.append(", bookedPassengers='").append(getBookedPassengers()).append('\'');
-        sb.append(", flightID='").append(getFlightID()).append('\'');
-        sb.append(", preserveSeatName='").append(getPreserveSeatName()).append('\'');
+        sb.append("reservationID='").append(getReservationID()).append(", ");
+        sb.append(", bookedPassengers='").append(getBookedPassengers()).append(", ");
+        sb.append(", flightID='").append(getFlightID()).append(", ");
+        sb.append(", preserveSeatName='").append(getPreserveSeatName()).append(", ");
         sb.append('}');
         return sb.toString();
     }

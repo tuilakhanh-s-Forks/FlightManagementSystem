@@ -4,14 +4,15 @@
  */
 package utils;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import model.Flight;
+import model.Seat;
 import view.Menu;
 
 /**
@@ -171,6 +172,18 @@ public class Input {
                 }
             }
         }
+    }
+    
+    public static int inputSeat(List<Seat> seats) {
+        System.out.println("Remaining Seat: ");
+        for (Seat seat : seats) {
+            if (!seat.isOccupied())
+            {
+                System.out.println(seat);
+            }
+        }
+        int seatNum = inputIntMax("Choose seat number: ", 0, seats.size());
+        return seatNum;
     }
     
     public static Flight getFlightByIndex(ArrayList<Flight> flightList) {

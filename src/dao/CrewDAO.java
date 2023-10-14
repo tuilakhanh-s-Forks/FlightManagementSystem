@@ -12,7 +12,7 @@ import model.Crew;
  *
  * @author bacda
  */
-public class CrewDAO extends ArrayList<Crew> implements DAO<Crew> {
+public class CrewDAO extends ArrayList<Crew> implements IDAO<Crew> {
     @Override
     public ArrayList getAll() {
         return this;
@@ -26,5 +26,14 @@ public class CrewDAO extends ArrayList<Crew> implements DAO<Crew> {
     @Override
     public void save(Crew crew) {
         this.add(crew);
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Crew crew : this) {
+            sb.append(crew).append("\n");
+        }
+        return sb.toString();
     }
 }

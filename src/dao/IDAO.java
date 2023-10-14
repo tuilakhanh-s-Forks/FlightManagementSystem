@@ -11,7 +11,7 @@ import java.util.Optional;
  *
  * @author bacda
  */
-public interface DAO<T> {
+public interface IDAO<T> {
     ArrayList<T> getAll();
  
     Optional<T> get(String id);

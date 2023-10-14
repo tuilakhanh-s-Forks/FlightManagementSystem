@@ -55,7 +55,7 @@ public class Seat implements Serializable{
 
     @Override
     public String toString() {
-        return String.format("Seat: %s ", seatNumber);
+        return String.format("Seat=%s, isOccupied=%s", seatNumber, isOccupied);
     }
 }
 

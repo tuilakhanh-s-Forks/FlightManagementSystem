@@ -22,7 +22,7 @@ public class Flight implements Serializable {
     private String destinationCity;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
-    private Seat[] seats;
+    private List<Seat> seats;
 
     public Flight() {
     }
@@ -33,8 +33,10 @@ public class Flight implements Serializable {
         this.destinationCity = destinationCity;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
-        this.seats = new Seat[totalSeats];
-        initializeSeats(totalSeats);
+        this.seats = new ArrayList<>(totalSeats);
+        for (int i = 0; i < totalSeats; i++) {
+            seats.add(new Seat(i + 1));
+        }
     }
 
     public String getFlightCode() {
@@ -77,42 +79,34 @@ public class Flight implements Serializable {
         this.arrivalTime = arrivalTime;
     }
 
-   public Seat[] getSeats() {
+   public List<Seat> getSeats() {
         return seats;
     }
    
-    public List getAvailableSeats(){
-        List<Seat> availableList = new ArrayList<>();
-        for (int i = 0; i < seats.length; i++)
-        {
-            Seat currentSeat = seats[i];
-            if(currentSeat.isBooked() == false) {
-                availableList.add(currentSeat);
+     public List<Seat> getAvailableSeats() {
+        List<Seat> availableSeats = new ArrayList<>();
+        for (Seat seat : seats) {
+            if (!seat.isBooked()) {
+                availableSeats.add(seat);
             }
         }
-        return availableList;
+        return availableSeats;
     }
 
-    public void setTotalSeats(Seat[] totalSeats) {
+    public void setSeats(List<Seat> seats) {
         this.seats = seats;
     }
-    
-    private void initializeSeats(int size){
-        for (int i = 0; i < size; i++)
-        {
-            seats[i] = new Seat(i+1);
-        }
-    }
+   
 
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         final StringBuilder sb = new StringBuilder("Flight{");
-        sb.append("flightNumber='").append(flightCode).append('\'');
-        sb.append(", departureCity='").append(departureCity).append('\'');
-        sb.append(", destinationCity='").append(destinationCity).append('\'');
-        sb.append(", departureTime=").append(sdf.format(departureTime));
-        sb.append(", arrivalTime=").append(sdf.format(arrivalTime));
+        sb.append("flightNumber='").append(flightCode).append(", ");
+        sb.append(", departureCity='").append(departureCity).append(", ");
+        sb.append(", destinationCity='").append(destinationCity).append(", ");
+        sb.append(", departureTime=").append(sdf.format(departureTime)).append(", ");;
+        sb.append(", arrivalTime=").append(sdf.format(arrivalTime)).append(", ");;
         sb.append(", Seats=").append(seats);
         sb.append('}');
         return sb.toString();

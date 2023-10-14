@@ -13,7 +13,7 @@ import utils.Utils;
  *
  * @author bacda
  */
-public class FlightDAO extends ArrayList<Flight> implements DAO<Flight> {
+public class FlightDAO extends ArrayList<Flight> implements IDAO<Flight> {
     
     @Override
     public ArrayList getAll() {

@@ -7,12 +7,13 @@ package dao;
 import java.util.ArrayList;
 import java.util.Optional;
 import model.Reservation;
+import utils.Utils;
 
 /**
  *
  * @author bacda
  */
-public class ReservationDAO extends ArrayList<Reservation> implements DAO<Reservation> {
+public class ReservationDAO extends ArrayList<Reservation> implements IDAO<Reservation> {
     
     @Override
     public ArrayList getAll() {
@@ -29,5 +30,14 @@ public class ReservationDAO extends ArrayList<Reservation> implements DAO<Reserv
     @Override
     public void save(Reservation reservation) {
         this.add(reservation);
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Reservation reservation : this) {
+            sb.append(reservation).append("\n");
+        }
+        return sb.toString();
     }
 }
